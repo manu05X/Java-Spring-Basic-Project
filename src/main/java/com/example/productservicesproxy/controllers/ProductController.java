@@ -2,6 +2,7 @@ package com.example.productservicesproxy.controllers;
 
 import com.example.productservicesproxy.services.IProductService;
 import com.example.productservicesproxy.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,11 @@ public class ProductController {
 
 
     //private ProductService productService;
+    @Autowired
     private IProductService productService;
+
     //constructor Injection of productService
-    public ProductController(ProductService productService){
+    public ProductController(IProductService productService) {
         this.productService = productService;
     }
 
@@ -29,6 +32,7 @@ public class ProductController {
         //return "Product Fetched with id:"+id;
         return productService.getProductById(id); // now the product will be fetched from service
     }
+
     @GetMapping()
     public List<String> getAllProducts() {
         return Collections.emptyList();
