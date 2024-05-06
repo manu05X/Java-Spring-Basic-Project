@@ -127,3 +127,17 @@ Example
         this.productService = productService;
     }
 ```
+
+### Qualifiers helps to route the services to the specefied services using the  Qualifiers Name
+
+```angular2html
+EXAMPLE:
+@Qualifier("SelfProductService")
+@Qualifier("FakeProductService")
+
+  public ProductController(@Qualifier("FakeProductService") IProductService productService) {
+        this.productService = productService;
+    }
+
+* The FakeStore services will be called as FakeProductService is specified in the constructor injection 
+```

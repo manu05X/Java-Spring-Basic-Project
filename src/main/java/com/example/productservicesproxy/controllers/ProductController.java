@@ -3,6 +3,7 @@ package com.example.productservicesproxy.controllers;
 import com.example.productservicesproxy.services.IProductService;
 import com.example.productservicesproxy.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,12 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-
     //private ProductService productService;
-    @Autowired
     private IProductService productService;
 
     //constructor Injection of productService
-    public ProductController(IProductService productService) {
+    @Autowired
+    public ProductController(@Qualifier("FakeProductService") IProductService productService) {
         this.productService = productService;
     }
 

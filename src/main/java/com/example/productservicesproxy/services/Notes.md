@@ -41,3 +41,23 @@ public class ProductController {
     // Other controller methods...
 }
 ```
+
+### What to do if we have more than one service class and one interface in our services module?
+
+```
+* Say we have ProductService and FakkeStoreProductService class and IProductService interface now we will have conflict
+in the ProductController file.
+* As private IProductService productService;, will be confused which IProductService object or beans to call.
+* ProductService OR FakkeStoreProductService as both have @Service annotation at the top.
+* So here come a concept of Qualifiers
+* We gave the name to the services using qualifiers and then specify same in the ProductController.
+
+EXAMPLE:
+@Qualifier("SelfProductService")
+@Qualifier("FakeProductService")
+
+  public ProductController(@Qualifier("FakeProductService") IProductService productService) {
+        this.productService = productService;
+    }
+```
+

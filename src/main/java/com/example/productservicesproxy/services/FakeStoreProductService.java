@@ -6,16 +6,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Qualifier("SelfProductService")
-public class ProductService implements IProductService{
+@Qualifier("FakeProductService")
+public class FakeStoreProductService implements IProductService{
     @Override
     public String getProductById(Long id) {
-        return "Product fetched from service with Id " + id;
+        return "Product fetched from FakeStore service with Id " + id;
     }
+
 
     @Override
     public List<String> getAllProducts() {
-        return null;
+        return List.of();
     }
 
     @Override
