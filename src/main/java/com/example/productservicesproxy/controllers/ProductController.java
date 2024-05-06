@@ -1,5 +1,6 @@
 package com.example.productservicesproxy.controllers;
 
+import com.example.productservicesproxy.services.IProductService;
 import com.example.productservicesproxy.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,8 @@ import java.util.List;
 public class ProductController {
 
 
-    private ProductService productService;
+    //private ProductService productService;
+    private IProductService productService;
     //constructor Injection of productService
     public ProductController(ProductService productService){
         this.productService = productService;
@@ -24,7 +26,8 @@ public class ProductController {
     //Path
     @GetMapping("/{id}")
     public String getProductById(@PathVariable("id") Long id) {
-        return "Product Fetched with id:"+id;
+        //return "Product Fetched with id:"+id;
+        return productService.getProductById(id); // now the product will be fetched from service
     }
     @GetMapping()
     public List<String> getAllProducts() {

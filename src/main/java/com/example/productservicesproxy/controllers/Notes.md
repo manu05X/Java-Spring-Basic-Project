@@ -102,7 +102,7 @@ So, to clarify, @PathVariable("id") doesn't assign a default value of NULL to id
 As service module is ready, now the controller will get data from Service module of ProductService.
 
 * So for creating a ProductController we need to have Object of ProductService.
-So we create ProductService object (private ProductService productService): This declares a field productService of type ProductService.
+So we create IProductService object (private IProductService productService): This declares a field productService of type ProductService.
 This field will be used to interact with the business logic layer (in this case, a service) to handle product-related operations.
 ```
 
@@ -119,10 +119,10 @@ why it will create object of ProductController because we have called it by usin
 ```
 Example
 ```
-
-    private ProductService productService;
+    
+    // private ProductService productService;
+    private IProductService productService;// interface object is creted and internally spring implements ProductService object
     //constructor Injection of productService
-    @Autowired
     public ProductController(ProductService productService){
         this.productService = productService;
     }
