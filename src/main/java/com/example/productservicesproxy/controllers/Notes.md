@@ -89,11 +89,41 @@ Value Binding: When a request comes in with a URL that matches the template (/ex
 Optional or Required: By default, path variables are required, meaning that if the {id} part of the URL is missing or cannot be converted to the type of the method parameter (in this case, Long), Spring will throw an exception. However, you can make the path variable optional by specifying @PathVariable(value = "id", required = false).
 So, to clarify, @PathVariable("id") doesn't assign a default value of NULL to id. If the path variable is missing in the URL, and it's not marked as optional, Spring will typically raise an exception rather than assigning a default value. You can provide a default value manually in your method signature if you want, like @PathVariable("id") Long id = 0L, but this is different from a default value of NULL.
 ```
-```angular2html
+```
   //Path
     @GetMapping("/product/{id}")
     public String getProductById(@PathVariable("id") Long id) {
         return "Product Fetched with id:"+id;
     }
 // maps the  @GetMapping("/product/{id}") to Long id by using @PathVariable("id")
+```
+### From where will the data come to controller?
+```angular2html
+As service module is ready, now the controller will get data from Service module of ProductService.
+
+* So for creating a ProductController we need to have Object of ProductService.
+So we create ProductService object (private ProductService productService): This declares a field productService of type ProductService.
+This field will be used to interact with the business logic layer (in this case, a service) to handle product-related operations.
+```
+
+### How we will get the ProductService?
+```
+Now we will inject the ProductService via Construct Injection
+We are using constructor of ProductController, in that we are injecting the object of ProductService.
+```
+### How the ProductService will be injected?
+```
+Spring will inject it for us, Using the annotation @Autowired.
+Spring will create object of ProductService then it will Autowire that object into the constructor for creating the object of ProductController.
+why it will create object of ProductController because we have called it by using @RestController so it will create its bean.
+```
+Example
+```
+
+    private ProductService productService;
+    //constructor Injection of productService
+    @Autowired
+    public ProductController(ProductService productService){
+        this.productService = productService;
+    }
 ```
