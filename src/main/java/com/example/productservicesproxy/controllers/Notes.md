@@ -49,7 +49,7 @@ Let us understand how to write controller methods mapped with @GetMapping annota
 * HTTP GET /users – returns all the users in the system.
 * HTTP GET /users/{id} – returns a user by specified id.
 
-```
+```java
 @RestController
 public class UserController {
 
@@ -129,8 +129,10 @@ Example
 ```
 
 ### Qualifiers helps to route the services to the specefied services using the  Qualifiers Name
-
-```angular2html
+* In SOLID principal we have learned that no two concrete class should depend on each other.
+* So here come a concept of Qualifiers for removing the dependencies on IProductService Or to remove the confusion of controller which service to use.
+* By providing @Qualifier("NameService") we map the incoming request from controller to the specific service in the Services module. 
+```java
 EXAMPLE:
 @Qualifier("SelfProductService")
 @Qualifier("FakeProductService")
@@ -139,5 +141,5 @@ EXAMPLE:
         this.productService = productService;
     }
 
-* The FakeStore services will be called as FakeProductService is specified in the constructor injection 
+// The FakeStore services will be called as FakeProductService is specified in the constructor injection 
 ```
