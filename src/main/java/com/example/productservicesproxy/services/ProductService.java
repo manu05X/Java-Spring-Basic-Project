@@ -1,16 +1,21 @@
 package com.example.productservicesproxy.services;
 
+import com.example.productservicesproxy.models.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@Qualifier("SelfProductService")
+
+@Service("SelfProductService")
 public class ProductService implements IProductService{
+//    @Override
+//    public String getProductById(Long id) {
+//        return "Product fetched from service with Id " + id;
+//    }
     @Override
-    public String getProductById(Long id) {
-        return "Product fetched from service with Id " + id;
+    public Product getProductById(Long id) {
+        return null;
     }
 
     @Override

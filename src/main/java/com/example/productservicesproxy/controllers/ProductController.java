@@ -1,7 +1,7 @@
 package com.example.productservicesproxy.controllers;
 
+import com.example.productservicesproxy.models.Product;
 import com.example.productservicesproxy.services.IProductService;
-import com.example.productservicesproxy.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +28,7 @@ public class ProductController {
 
     //Path
     @GetMapping("/{id}")
-    public String getProductById(@PathVariable("id") Long id) {
+    public Product getProductById(@PathVariable("id") Long id) {
         //return "Product Fetched with id:"+id;
         return productService.getProductById(id); // now the product will be fetched from service
     }
