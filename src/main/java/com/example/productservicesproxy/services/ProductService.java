@@ -19,7 +19,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public List<String> getAllProducts() {
+    public List<Product> getAllProducts() {
         return null;
     }
 

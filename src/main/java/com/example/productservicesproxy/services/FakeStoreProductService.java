@@ -10,12 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("FakeProductService")
 public class FakeStoreProductService implements IProductService{
     private RestTemplateBuilder restTemplateBuilder;
     private String getProductUrl = "https://fakestoreapi.com/products/1";
+    private String genericProductUrl = "https://fakestoreapi.com/products";
 
     @Autowired
     public FakeStoreProductService(RestTemplateBuilder restTemplateBuilder) {
@@ -34,8 +36,14 @@ public class FakeStoreProductService implements IProductService{
 
 
     @Override
-    public List<String> getAllProducts() {
-        return List.of();
+    public List<Product> getAllProducts() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto[]> responseEntity = restTemplate.getForEntity(genericProductUrl, FakeStoreProductDto[].class);
+        List<Product> products = new ArrayList<>();
+        for(FakeStoreProductDto fakeStoreProductDto : responseEntity.getBody()) {
+            products.add(getProductFromFakeStoreProductDto(fakeStoreProductDto));
+        }
+        return products;
     }
 
     @Override

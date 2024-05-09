@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @GetMapping()
-    public List<String> getAllProducts() {
-        return Collections.emptyList();
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
     }
 }

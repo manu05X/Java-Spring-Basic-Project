@@ -3,6 +3,8 @@ package com.example.productservicesproxy.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class Product extends BaseModel{
@@ -10,4 +12,6 @@ public class Product extends BaseModel{
     private double price;
     private String description;
     private Categories categories;
+
+    private List<String> allowedUser;
 }
