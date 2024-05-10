@@ -6,7 +6,6 @@ import com.example.productservicesproxy.models.Product;
 import com.example.productservicesproxy.services.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -36,17 +35,6 @@ public class ProductController {
     @GetMapping()
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
-    private ExceptionDto handleProductNotFoundException(ProductNotFoundException e) {
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage(e.getMessage());
-        exceptionDto.setStatus("Failure");
-
-        return exceptionDto;
     }
 
 }

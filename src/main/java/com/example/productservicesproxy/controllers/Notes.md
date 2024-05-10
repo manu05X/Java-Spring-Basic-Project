@@ -143,3 +143,23 @@ EXAMPLE:
 
 // The FakeStore services will be called as FakeProductService is specified in the constructor injection 
 ```
+
+### Exception handler
+
+* Adding the ExceptionDTO as we cannot send  exception stacktrace to user/client or so service is called by servicelayer i.e controller so we modify exception response in controller handleProductNotFoundException
+
+* As controller was also handling the routing to athe services and the Exception coming from service as response so it was voilating the SRP of SOLID 
+* so we make advice module for handling the exception and returning to the client as modified exception by removing the exception stacktrace
+
+* Above is Not mapped with any particular controller so it is a Global advice. So any controller if it gets ProductNotFoundException
+* this will get trigger.
+
+* We can specify controller name as well @ControllerAdvice("Name_Of_Controller") for the specific controller we want to run the advice
+* @ControllerAdvice(assignableTypes = {ProductControllerAdvice.class})
+
+
+* As in previous the status was returned as 200 OK but it was exception so we add @ResponseStatus(HttpStatus.NOT_FOUND) and @ResponseBody
+* @ResponseStatus(HttpStatus.NOT_FOUND) // we want the status to be as 404 to be displayed 
+* @ResponseBody // we want output to go in response body
+
+* AOP -> Aspect oriented programing
