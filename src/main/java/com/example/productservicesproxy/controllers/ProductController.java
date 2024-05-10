@@ -1,5 +1,6 @@
 package com.example.productservicesproxy.controllers;
 
+import com.example.productservicesproxy.exceptions.ExceptionDto;
 import com.example.productservicesproxy.exceptions.ProductNotFoundException;
 import com.example.productservicesproxy.models.Product;
 import com.example.productservicesproxy.services.IProductService;
@@ -34,6 +35,15 @@ public class ProductController {
     @GetMapping()
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    private ExceptionDto handleProductNotFoundException(ProductNotFoundException e) {
+        ExceptionDto exceptionDto = new ExceptionDto();
+        exceptionDto.setMessage(e.getMessage());
+        exceptionDto.setStatus("Failure");
+
+        return exceptionDto;
     }
 
 }
