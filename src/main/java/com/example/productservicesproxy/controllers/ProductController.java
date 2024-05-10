@@ -1,6 +1,5 @@
 package com.example.productservicesproxy.controllers;
 
-import com.example.productservicesproxy.exceptions.ExceptionDto;
 import com.example.productservicesproxy.exceptions.ProductNotFoundException;
 import com.example.productservicesproxy.models.Product;
 import com.example.productservicesproxy.services.IProductService;

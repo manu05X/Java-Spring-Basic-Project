@@ -3,10 +3,12 @@ package com.example.productservicesproxy.controllers.advice;
 import com.example.productservicesproxy.exceptions.ExceptionDto;
 import com.example.productservicesproxy.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+@ControllerAdvice
 public class ProductControllerAdvice {
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)// we want the status to be as 404 to be displayed
