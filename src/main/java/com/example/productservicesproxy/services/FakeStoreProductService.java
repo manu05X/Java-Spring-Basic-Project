@@ -1,6 +1,7 @@
 package com.example.productservicesproxy.services;
 
 import com.example.productservicesproxy.dtos.FakeStoreProductDto;
+import com.example.productservicesproxy.exceptions.ProductNotFoundException;
 import com.example.productservicesproxy.models.Categories;
 import com.example.productservicesproxy.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ import java.util.List;
 @Service("FakeProductService")
 public class FakeStoreProductService implements IProductService{
     private RestTemplateBuilder restTemplateBuilder;
-    private String getProductUrl = "https://fakestoreapi.com/products/1";
+    //private String getProductUrl = "https://fakestoreapi.com/products/1";
+    private String specificProductUrl = "https://fakestoreapi.com/products/{id}";
     private String genericProductUrl = "https://fakestoreapi.com/products";
 
     @Autowired
@@ -25,12 +27,12 @@ public class FakeStoreProductService implements IProductService{
     }
 
     @Override
-    public Product getProductById(Long id) {
+    public Product getProductById(Long id) throws ProductNotFoundException {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity(getProductUrl, FakeStoreProductDto.class);
-        //return "Product fetched from FakeStore service with Id " + id;
-        //return "Product fetched from FakeStore service with Id " + responseEntity.toString();
-        //return responseEntity.getBody();
+        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity(specificProductUrl, FakeStoreProductDto.class, id);
+        if(responseEntity.getBody() == null){
+            throw new ProductNotFoundException("Product Not Found with id: " + id);
+        }
         return getProductFromFakeStoreProductDto(responseEntity.getBody());
     }
 

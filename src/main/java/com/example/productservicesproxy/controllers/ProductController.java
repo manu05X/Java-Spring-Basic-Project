@@ -1,13 +1,11 @@
 package com.example.productservicesproxy.controllers;
 
+import com.example.productservicesproxy.exceptions.ProductNotFoundException;
 import com.example.productservicesproxy.models.Product;
 import com.example.productservicesproxy.services.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +26,7 @@ public class ProductController {
 
     //Path
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
+    public Product getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
         //return "Product Fetched with id:"+id;
         return productService.getProductById(id); // now the product will be fetched from service
     }
@@ -37,4 +35,5 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
+
 }
