@@ -49,14 +49,19 @@ public class FakeStoreProductService implements IProductService{
     }
 
     @Override
+    public Product addProduct(Product product) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto> responseEntity =
+                restTemplate.postForEntity(genericProductUrl, getFakeStoreProductDtoFromProduct(product), FakeStoreProductDto.class);
+
+        return getProductFromFakeStoreProductDto(responseEntity.getBody());
+    }
+
+    @Override
     public void deleteProductById(Long id) {
 
     }
 
-    @Override
-    public void addProduct() {
-
-    }
 
     @Override
     public void updateProduct() {
@@ -75,5 +80,15 @@ public class FakeStoreProductService implements IProductService{
         product.setCategories(categories);
 
         return product;
+    }
+
+    private FakeStoreProductDto getFakeStoreProductDtoFromProduct(Product product){
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(product.getTitle());
+        fakeStoreProductDto.setDescription(product.getDescription());
+        fakeStoreProductDto.setCategory(product.getCategories().getNameCategory());
+        fakeStoreProductDto.setPrice(product.getPrice());
+
+        return fakeStoreProductDto;
     }
 }

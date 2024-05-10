@@ -29,8 +29,8 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void addProduct() {
-
+    public Product addProduct(Product product) {
+        return null;
     }
 
     @Override

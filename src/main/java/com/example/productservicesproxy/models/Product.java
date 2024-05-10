@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class Product extends BaseModel{
     private String title;
-    private double price;
+    private Long price;
     private String description;
     private Categories categories;
 
